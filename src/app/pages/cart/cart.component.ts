@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../shareds/services/cart.service";
 import {Cart} from "../../shareds/models/cart";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-cart',
@@ -8,13 +9,11 @@ import {Cart} from "../../shareds/models/cart";
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit{
-  cart: Cart | undefined
+  cart$: Observable<Cart>;
   constructor(private cartService: CartService) {
   }
   ngOnInit(): void {
-    this.cartService.getCard().subscribe( cart => {
-      this.cart = cart
-    } )
+    this.cart$ = this.cartService.getCard();
   }
 
 }

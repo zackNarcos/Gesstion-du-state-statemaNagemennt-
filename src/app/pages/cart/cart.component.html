@@ -1,4 +1,4 @@
-<div *ngIf="cart" class="container px-5">
+<div *ngIf="cart$ | async as cart" class="container px-5">
   <main>
     <div class="py-5 text-center">
       <i class="bi bi-cart-check fs-1"></i>
