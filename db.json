@@ -3,52 +3,103 @@
     {
       "id": 1,
       "name": "Product 1",
-      "price": 10
+      "price": 10,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 2,
       "name": "Product 2",
-      "price": 20
+      "price": 20,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 3,
       "name": "Product 3",
-      "price": 45
+      "price": 45,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 4,
       "name": "Product 4",
-      "price": 40
+      "price": 40,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 5,
       "name": "Product 5",
-      "price": 50
+      "price": 50,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 6,
       "name": "Product 6",
-      "price": 60
+      "price": 60,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 7,
       "name": "Product 7",
-      "price": 70
+      "price": 70,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 8,
       "name": "Product 8",
-      "price": 80
+      "price": 80,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 9,
       "name": "Product 9",
-      "price": 90
+      "price": 90,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
     },
     {
       "id": 10,
       "name": "Product 10",
-      "price": 100
+      "price": 100,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
+    },
+    {
+      "id": 11
+    },
+    {
+      "id": 12
+    },
+    {
+      "id": 13
+    },
+    {
+      "id": 14
+    },
+    {
+      "id": 15
+    },
+    {
+      "id": 16,
+      "qte": 0,
+      "name": "this.addProductForm.value.name",
+      "price": "this.addProductForm.value.name",
+      "image": "this.addProductForm.value.name",
+      "description": "this.addProductForm.value.name"
+    },
+    {
+      "id": 17,
+      "qte": 0,
+      "name": "vvuhhuh",
+      "price": 0,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "gubui"
     }
   ],
   "profile": {

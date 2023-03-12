@@ -21,4 +21,8 @@ export class ProductsService {
   getProduct(id: string | null):Observable<Product>{
     return this.http.get<Product>(`${this.URL_API}/products/${id}`);
   }
+
+  addProduct(product: Product){
+    return this.http.post(`${this.URL_API}/products`,product)
+  }
 }
