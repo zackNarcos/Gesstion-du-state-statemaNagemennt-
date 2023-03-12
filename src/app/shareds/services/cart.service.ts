@@ -7,34 +7,39 @@ import {Product} from "../models/Product";
   providedIn: 'root'
 })
 export class CartService {
-  panier$:BehaviorSubject<Cart>=new BehaviorSubject<Cart>({
-    products:[],
-    total:0
-  });
+    panier$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>({
+        products: [],
+        total: 0
+    });
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  getCard():Observable<Cart>{
-    return this.panier$.asObservable();
-  }
+    getCard(): Observable<Cart> {
+        return this.panier$.asObservable();
+    }
 
-    addToCard(product: Product, qteCom: number):void{
-    this.getCard().pipe(take(1)).subscribe(
-        cart=> {
-          let index: number = 0
-          if (cart.products.includes(product,index)){
-            cart.products[index].qte += 1
-            cart.total +=  product.price
-          }else {
-            cart.total +=  product.price * qteCom
-              product.qte = qteCom
-            cart.products.push(product)
-          }
+    addToCard(product: Product, qteCom: number): void {
+        // we take the value of the cart
+        this.panier$.pipe(
+            // we take only the first value of the cart for the subscription
+            take(1)).subscribe(panier => {
 
-        }
-    )
-  }
+            // we check if the product is already in the cart
+            let index = panier.products.findIndex(p => p.id === product.id);
 
-
+            // if the product is not in the cart we add it to the cart
+            if (index === -1) {
+                panier.products.push({...product, qte: qteCom});
+            }
+            // if the product is already in the cart we add the quantity to the existing quantity
+            else {
+                panier.products[index].qte += qteCom;
+            }
+            // we calculate the total of the cart
+            panier.total += product.price * qteCom;
+            // we update the cart
+            this.panier$.next(panier);
+        })
+    }
 }
