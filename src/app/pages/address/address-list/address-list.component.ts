@@ -11,7 +11,6 @@ export class AddressListComponent implements OnInit {
   constructor(private notiflixService : NotiflixService) { }
 
   ngOnInit() {
-    this.notiflixService.info('je suis un message de texte')
   }
 
 
