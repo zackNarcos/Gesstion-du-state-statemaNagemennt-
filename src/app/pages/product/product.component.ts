@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductsService} from "../../shareds/services/api/products.service";
 import {Product} from "../../shareds/models/Product";
 import {CartService} from "../../shareds/services/cart.service";
+import {NotiflixService} from "../../shareds/services/notiflix.service";
 
 @Component({
   selector: 'app-product',
@@ -16,7 +17,8 @@ export class ProductComponent implements OnInit{
   constructor(
       private route: ActivatedRoute,
       private service: ProductsService,
-      private cartService: CartService
+      private cartService: CartService,
+      private notiflixService: NotiflixService
   ) {
   }
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class ProductComponent implements OnInit{
 
     if (this.product) {
       this.cartService.addToCard(this.product, parseInt(value))
+      this.notiflixService.success( `${this.product.name} added to cart` )
     }
   }
 }
