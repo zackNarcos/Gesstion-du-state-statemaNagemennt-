@@ -112,5 +112,17 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "addresses": [
+    {
+      "id": 1,
+      "fistName": "ABESSOLO",
+      "lastName": "EKOUMA",
+      "email": "example@gmail.com",
+      "address": "Kulas Light",
+      "country": "USA",
+      "state": "Gwenborough",
+      "zip": "92998-3874"
+    }
+  ]
 }
