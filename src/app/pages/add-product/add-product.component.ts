@@ -11,7 +11,7 @@ import {NotiflixService} from "../../shareds/services/notiflix.service";
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit{
-  addProductForm: FormGroup ;
+  addProductForm: any ;
   constructor(
       private prodService: ProductsService,
       private router: Router,

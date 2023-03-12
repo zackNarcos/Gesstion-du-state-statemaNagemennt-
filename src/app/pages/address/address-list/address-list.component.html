@@ -36,9 +36,9 @@
                     <td>04/10/2013</td>
                     <td>Admin</td>
                     <td>Active</td>
-                    <td>
-                        <a href="#" class="settings" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                    <td class="cursor-pointer">
+                        <a [routerLink]="['/addresses', 1, 'edit']" class="settings cursor-pointer" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteAddress(1)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                     </td>
                 </tr>
                 <tr>
@@ -48,8 +48,8 @@
                     <td>Publisher</td>
                     <td> Active</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                        <a [routerLink]="['/addresses', 2, 'edit']" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteAddress(1)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                     </td>
                 </tr>
                 <tr>
@@ -59,8 +59,8 @@
                     <td>Publisher</td>
                     <td>Suspended</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                        <a [routerLink]="['/addresses', 3, 'edit']" class="settings cursor-pointer" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteAddress(1)" class="delete " title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                     </td>
                 </tr>
                 <tr>
@@ -70,8 +70,8 @@
                     <td>Reviewer</td>
                     <td> Active</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                        <a [routerLink]="['/addresses', 4, 'edit']" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteAddress(1)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                     </td>
                 </tr>
                 <tr>
@@ -81,8 +81,8 @@
                     <td>Moderator</td>
                     <td> Inactive</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                        <a [routerLink]="['/addresses', 5, 'edit']" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteAddress(1)" class="delete" title="Delete cursor-pointer" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                     </td>
                 </tr>
                 </tbody>

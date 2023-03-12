@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AddressRoutingModule } from './address-routing.module';
 import { AddressFormComponent } from './address-form/address-form.component';
 import { AddressListComponent } from './address-list/address-list.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { AddressListComponent } from './address-list/address-list.component';
   ],
   imports: [
     CommonModule,
-    AddressRoutingModule
+    AddressRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AddressModule { }
