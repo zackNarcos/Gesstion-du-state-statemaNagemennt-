@@ -7,7 +7,7 @@ import {Product} from "../models/Product";
   providedIn: 'root'
 })
 export class CartService {
-    panier$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>({
+    private panier$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>({
         products: [],
         totalItems: 0,
         total: 0
@@ -19,6 +19,15 @@ export class CartService {
     getCard(): Observable<Cart> {
         return this.panier$.asObservable();
     }
+
+    checkout(){
+        this.panier$.next({
+            products : [],
+            totalItems: 0,
+            total: 0
+        })
+    }
+
 
     addToCard(product: Product, qteCom: number): void {
         // we take the value of the cart
