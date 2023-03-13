@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, take} from "rxjs";
+import {BehaviorSubject, map, Observable, of, take} from "rxjs";
 import {Cart} from "../models/cart";
 import {Product} from "../models/Product";
 
@@ -9,6 +9,7 @@ import {Product} from "../models/Product";
 export class CartService {
     panier$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>({
         products: [],
+        totalItems: 0,
         total: 0
     });
 
@@ -31,10 +32,13 @@ export class CartService {
             // if the product is not in the cart we add it to the cart
             if (index === -1) {
                 panier.products.push({...product, qte: qteCom});
+                panier.totalItems += qteCom;
             }
             // if the product is already in the cart we add the quantity to the existing quantity
             else {
                 panier.products[index].qte += qteCom;
+                panier.totalItems += qteCom;
+
             }
             // we calculate the total of the cart
             panier.total += product.price * qteCom;
@@ -43,7 +47,4 @@ export class CartService {
         })
     }
 
-    getTotal(){
-
-    }
 }
