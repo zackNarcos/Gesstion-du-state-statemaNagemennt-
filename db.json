@@ -69,45 +69,6 @@
       "price": 100,
       "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
-    },
-    {
-      "id": 11
-    },
-    {
-      "id": 12
-    },
-    {
-      "id": 13
-    },
-    {
-      "id": 14
-    },
-    {
-      "id": 15
-    },
-    {
-      "id": 16,
-      "qte": 0,
-      "name": "this.addProductForm.value.name",
-      "price": "this.addProductForm.value.name",
-      "image": "this.addProductForm.value.name",
-      "description": "this.addProductForm.value.name"
-    },
-    {
-      "id": 17,
-      "qte": 0,
-      "name": "vvuhhuh",
-      "price": 0,
-      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-      "description": "gubui"
-    },
-    {
-      "id": 18,
-      "qte": 0,
-      "name": "ABESSOLO EKOUMA",
-      "price": 0,
-      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-      "description": ",jh"
     }
   ],
   "profile": {
@@ -115,14 +76,24 @@
   },
   "addresses": [
     {
-      "id": 1,
-      "fistName": "ABESSOLO",
-      "lastName": "EKOUMA",
-      "email": "example@gmail.com",
-      "address": "Kulas Light",
-      "country": "USA",
-      "state": "Gwenborough",
-      "zip": "92998-3874"
+      "firstName": "abessolo",
+      "lastName": "zackarie",
+      "email": "zackabess@gmail.com",
+      "address": "Ouest foire V3",
+      "country": "hello",
+      "state": "california",
+      "zip": "1233",
+      "id": 1
+    },
+    {
+      "firstName": "abessolo",
+      "lastName": "zackarie",
+      "email": "zackabess@gmail.com",
+      "address": "Ouest foire",
+      "country": "hello",
+      "state": "california",
+      "zip": "1233",
+      "id": 2
     }
   ]
 }
