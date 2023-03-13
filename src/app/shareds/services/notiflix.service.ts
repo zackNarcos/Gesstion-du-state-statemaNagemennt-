@@ -10,7 +10,7 @@ export class NotiflixService {
   constructor() {
     Notify.init({
       width: '300px',
-      position: 'right-top',
+      position: 'right-bottom',
     });
   }
 

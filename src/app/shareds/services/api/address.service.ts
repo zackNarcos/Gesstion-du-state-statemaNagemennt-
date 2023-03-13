@@ -18,16 +18,16 @@ export class AddressService {
         return this.http.get<Address[]>(`${this.URL_API}/addresses`);
     }
 
-    getAddress(id: string | null): Observable<Address> {
+    getAddress(id: number | null): Observable<Address> {
         return this.http.get<Address>(`${this.URL_API}/addresses/${id}`);
     }
 
-    addAddress(product: Product) {
-        return this.http.post(`${this.URL_API}/addresses`, product)
+    addAddress(address: Address) {
+        return this.http.post(`${this.URL_API}/addresses`, address)
     }
 
-    updateAddress(id: string | null, product: Product) {
-        return this.http.put(`${this.URL_API}/addresses/${id}`, product)
+    updateAddress(id: number | null, address: Address) {
+        return this.http.put(`${this.URL_API}/addresses/${id}`, address)
     }
 
     deleteAddress(id: string | null) {

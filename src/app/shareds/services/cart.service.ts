@@ -42,4 +42,8 @@ export class CartService {
             this.panier$.next(panier);
         })
     }
+
+    getTotal(){
+
+    }
 }

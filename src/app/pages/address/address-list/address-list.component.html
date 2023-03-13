@@ -30,59 +30,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Product Name</td>
-                    <td>04/10/2013</td>
-                    <td>Admin</td>
-                    <td>Active</td>
+                <tr *ngFor="let address of addresses$ | async">
+                    <td>{{ address.id }}</td>
+                    <td>{{ address.address }}</td>
+                    <td>{{ address.country }}</td>
+                    <td>{{ address.state }}</td>
+                    <td>{{ address.zip }}</td>
                     <td class="cursor-pointer">
-                        <a [routerLink]="['/addresses', 1, 'edit']" class="settings cursor-pointer" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a (click)="deleteAddress(1)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Product Name</td>
-                    <td>05/08/2014</td>
-                    <td>Publisher</td>
-                    <td> Active</td>
-                    <td>
-                        <a [routerLink]="['/addresses', 2, 'edit']" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a (click)="deleteAddress(1)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Product Name</td>
-                    <td>11/05/2015</td>
-                    <td>Publisher</td>
-                    <td>Suspended</td>
-                    <td>
-                        <a [routerLink]="['/addresses', 3, 'edit']" class="settings cursor-pointer" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a (click)="deleteAddress(1)" class="delete " title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Product Name</td>
-                    <td>06/09/2016</td>
-                    <td>Reviewer</td>
-                    <td> Active</td>
-                    <td>
-                        <a [routerLink]="['/addresses', 4, 'edit']" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a (click)="deleteAddress(1)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Product Name</td>
-                    <td>12/08/2017</td>
-                    <td>Moderator</td>
-                    <td> Inactive</td>
-                    <td>
-                        <a [routerLink]="['/addresses', 5, 'edit']" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a (click)="deleteAddress(1)" class="delete" title="Delete cursor-pointer" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                        <a [routerLink]="['/addresses', address.id, 'edit']" class="settings cursor-pointer" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteAddress(address.id)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
                     </td>
                 </tr>
                 </tbody>

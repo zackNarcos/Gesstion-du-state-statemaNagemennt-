@@ -42,13 +42,12 @@ export class AddProductComponent implements OnInit{
       }
 
     this.prodService.addProduct(product).subscribe( resuslt => {
-        this.notifService.success("ok")
+        this.notifService.success(`Product: ${this.addProductForm.value.name} added with success`)
         this.router.navigate(['/'])
 
     },error => {
-        console.log("add product error")
+        this.notifService.success(`Failled to add product: ${this.addProductForm.value.name}`)
     })
-      console.log(product)
   }
 
 }
