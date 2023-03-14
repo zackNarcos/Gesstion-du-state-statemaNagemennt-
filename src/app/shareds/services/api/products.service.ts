@@ -18,11 +18,11 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.URL_API}/products`);
   }
 
-  getProduct(id: string | null):Observable<Product>{
+  getProduct(id: any | null):Observable<Product>{
     return this.http.get<Product>(`${this.URL_API}/products/${id}`);
   }
 
-  addProduct(product: Product){
-    return this.http.post(`${this.URL_API}/products`,product)
+  addProduct(product: Product) : Observable<Product>{
+    return this.http.post<Product>(`${this.URL_API}/products`,product)
   }
 }
