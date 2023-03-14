@@ -1,9 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NotiflixService} from "../../../shareds/services/notiflix.service";
 import {Confirm} from "notiflix/build/notiflix-confirm-aio";
 import {AddressService} from "../../../shareds/services/api/address.service";
-import {Observable} from "rxjs";
+import {Observable, take} from "rxjs";
 import {Address} from "../../../shareds/models/address";
+import {select, Store} from "@ngrx/store";
+import {AddressActionsList} from "../../../store/actions/address.actions";
+import {addressSelectors} from "../../../store/selectors/address.selectors";
+import {AppStateInterface} from "../../../store/app.state.interface";
 
 @Component({
     selector: 'app-address-list',
@@ -11,34 +15,36 @@ import {Address} from "../../../shareds/models/address";
     styleUrls: ['./address-list.component.scss'],
 })
 export class AddressListComponent implements OnInit {
-    addresses$: Observable<Address[]>
+    addresses$: Observable<Address[]>;
+    isLoading$: Observable<boolean>;
+    error$: Observable<any>;
 
     constructor(
         private notiflixService: NotiflixService,
-        private addressService: AddressService
+        private addressService: AddressService,
+        private store: Store<AppStateInterface>
     ) {
+        this.isLoading$ = this.store.pipe(select(addressSelectors.selectAddressLoading));
+        this.error$ = this.store.pipe(select(addressSelectors.selectAddressError));
+        this.addresses$ = this.store.pipe(select(addressSelectors.selectAddresses));
     }
 
     ngOnInit() {
-        this.addresses$ = this.addressService.getAddresses()
+        this.store.dispatch(AddressActionsList.loadAddresses())
     }
 
 
-    deleteAddress(id: string) {
+    deleteAddress(id: number) {
         Confirm.show(
             'Delete Address',
             'Are you sure you want to delete this address?',
             'Yes',
             'No',
             () => {
-                this.addressService.deleteAddress(id).subscribe(()=>{
-                    this.notiflixService.failure('Address deleted')
-                    this.addresses$ = this.addressService.getAddresses()
-                },error => {
-                    this.notiflixService.warning('Address not deleted')
-                })
+                this.store.dispatch(AddressActionsList.deleteAddress({addressId: id}));
             },
-            () => {this.notiflixService.warning('Operation canceled');},{
-        },);
+            () => {
+                this.notiflixService.warning('Operation canceled');
+            }, {},);
     }
 }

@@ -22,15 +22,15 @@ export class AddressService {
         return this.http.get<Address>(`${this.URL_API}/addresses/${id}`);
     }
 
-    addAddress(address: Address) {
-        return this.http.post(`${this.URL_API}/addresses`, address)
+    addAddress(address: Address) : Observable<Address>{
+        return this.http.post<Address>(`${this.URL_API}/addresses`, address)
     }
 
-    updateAddress(id: number | null, address: Address) {
-        return this.http.put(`${this.URL_API}/addresses/${id}`, address)
+    updateAddress( address: Address): Observable<Address> {
+        return this.http.put<Address>(`${this.URL_API}/addresses/${address.id}`, address)
     }
 
-    deleteAddress(id: string | null) {
+    deleteAddress(id: number | null) {
         return this.http.delete(`${this.URL_API}/addresses/${id}`)
     }
 }

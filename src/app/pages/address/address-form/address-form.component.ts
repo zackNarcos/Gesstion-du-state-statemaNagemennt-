@@ -4,6 +4,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AddressService} from "../../../shareds/services/api/address.service";
 import {Address} from "../../../shareds/models/address";
 import {NotiflixService} from "../../../shareds/services/notiflix.service";
+import {AppStateInterface} from "../../../store/app.state.interface";
+import {select, Store} from "@ngrx/store";
+import {AddressActionsList} from "../../../store/actions/address.actions";
+import {addressSelectors} from "../../../store/selectors/address.selectors";
 
 @Component({
     selector: 'app-address-form',
@@ -15,12 +19,13 @@ export class AddressFormComponent implements OnInit {
     constructor(
         private route : ActivatedRoute,
         private router: Router,
-        private addressService: AddressService,
-        private notiflixService: NotiflixService
+        private notiflixService: NotiflixService,
+        private store: Store<AppStateInterface>
         ) {}
 
     addAddressForm: FormGroup
     addressId: number = null;
+    selectedAddress: Address = null;
     ngOnInit() {
         // Create the form group and form controls when the component is initialized
         this.addAddressForm = new FormGroup({
@@ -37,15 +42,17 @@ export class AddressFormComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.addressId = params['id'];
             if (this.addressId){
-                this.addressService.getAddress(this.addressId).subscribe({
-                    next:(data)=>{
-                        this.addAddressForm.patchValue(data)
+                this.store.dispatch(AddressActionsList.loadAddressById({addressId: this.addressId}))
+                this.store.pipe(select(addressSelectors.selectAddress)).subscribe({
+                    next: (address: Address) => {
+                        this.selectedAddress = address
+                        this.addAddressForm.patchValue(address)
                     },
-                    error:()=>{
-                        this.notiflixService.failure("Address not found")
+                    error: (error) => {
+                        this.notiflixService.failure(`Failled to load address: ${this.addressId}`)
                         this.router.navigateByUrl('/addresses')
-                }
-                })
+                    }
+                });
             }
         });
 
@@ -54,28 +61,20 @@ export class AddressFormComponent implements OnInit {
 
     submitForm() {
         if (this.addressId != null) {
-            this.addressService.updateAddress(this.addressId, this.addAddressForm.value).subscribe({
-                next: (data)=>{
-                    this.notiflixService.success(`Address: ${this.addAddressForm.value.address} added`)
-                    this.addAddressForm.reset()
-                    this.router.navigateByUrl('/addresses')
-                },
-                error:()=> {
-                this.notiflixService.failure(`Failled to add address: ${this.addAddressForm.value.address}`)
-            }
-            })
+            let address: Address =  this.addAddressForm.value
+            address.id = this.addressId
+            this.store.dispatch(AddressActionsList.updateAddress({address: address}))
+            this.notiflixService.success(`Address: ${this.addAddressForm.value.address} added`)
+            this.addAddressForm.reset()
+            this.router.navigateByUrl('/addresses')
 
         }else{
             //when is new address
             let address: Address =  this.addAddressForm.value
-            this.addressService.addAddress(address).subscribe(()=>{
-                this.notiflixService.success(`Address: ${this.addAddressForm.value.address} added`)
-                this.addAddressForm.reset()
-                this.router.navigateByUrl('/addresses')
-                },
-                error => {
-                this.notiflixService.failure(`Failled to add address: ${this.addAddressForm.value.address}`)
-            })
+            this.store.dispatch(AddressActionsList.createAddress({address: address}))
+            this.notiflixService.success(`Address: ${this.addAddressForm.value.address} added`)
+            this.addAddressForm.reset()
+            this.router.navigateByUrl('/addresses')
         }
     }
 

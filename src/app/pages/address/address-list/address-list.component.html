@@ -5,7 +5,7 @@
         </div>
     </div>
 </section>
-<div class="container-xl">
+<div class="container-xl" *ngIf="addresses$ | async as addresses" >
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -30,7 +30,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let address of addresses$ | async">
+                <tr *ngFor="let address of addresses">
                     <td>{{ address.id }}</td>
                     <td>{{ address.address }}</td>
                     <td>{{ address.country }}</td>
@@ -58,3 +58,4 @@
         </div>
     </div>
 </div>
+<div class="container-xl" *ngIf="isLoading$ | async">loading...</div>
