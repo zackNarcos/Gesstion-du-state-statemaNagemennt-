@@ -3,6 +3,9 @@ import {CartService} from "../../shareds/services/cart.service";
 import {Cart} from "../../shareds/models/cart";
 import {Observable} from "rxjs";
 import {NotiflixService} from "../../shareds/services/notiflix.service";
+import {Store} from "@ngrx/store";
+import {AppStateInterface} from "../../store/app.state.interface";
+import {CartActionsList} from "../../store/actions/cart.actions";
 
 @Component({
   selector: 'app-cart',
@@ -11,14 +14,15 @@ import {NotiflixService} from "../../shareds/services/notiflix.service";
 })
 export class CartComponent implements OnInit{
   cart$: Observable<Cart>;
-  constructor(private cartService: CartService, private notiflixService : NotiflixService) {
+  constructor(
+      private store: Store<AppStateInterface>,
+      private notiflixService : NotiflixService) {
+    this.cart$ = this.store.select(state => state.cart.cart);
   }
   ngOnInit(): void {
-    this.cart$ = this.cartService.getCard();
   }
 
   checkout() {
-    this.cartService.checkout();
-    this.notiflixService.success(`Your Order is validated`)
+    this.store.dispatch(CartActionsList.clearCart());
   }
 }
