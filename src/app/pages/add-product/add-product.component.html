@@ -1,13 +1,13 @@
 <form [formGroup]="addProductForm" (ngSubmit)="addProductForm.valid && save()" class="row mx-auto my-5 col-7 needs-validation d-flex g-3  p-5 border rounded-5 border-dark bg-secondary-subtle">
     <div class="col-md-6">
         <label for="Name" class="form-label">Name</label>
-        <input type="email" [ngClass]="{'is-invalid': addProductForm.get('name').invalid && addProductForm.get('name').touched }" class="form-control" id="Name" [formControlName]="'name'">
+        <input type="text" (change)="updateName()" [ngClass]="{'is-invalid': addProductForm.get('name').invalid && addProductForm.get('name').touched }" class="form-control" id="Name" [formControlName]="'name'">
     </div>
     <div class="col-md-6">
         <label for="Price" class="form-label">Price</label>
         <div class="input-group">
             <span class="input-group-text">$</span>
-            <input type="number" [ngClass]="{'is-invalid': addProductForm.get('price').invalid && addProductForm.get('price').touched }" class="form-control" id="Price" [formControlName]="'price'">
+            <input type="number" (change)="updatePrice()" [ngClass]="{'is-invalid': addProductForm.get('price').invalid && addProductForm.get('price').touched }" class="form-control" id="Price" [formControlName]="'price'">
         </div>
     </div>
     <div class="col-12">

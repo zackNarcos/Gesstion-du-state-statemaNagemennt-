@@ -1,9 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {NotiflixService} from "../../../shareds/services/notiflix.service";
 import {Confirm} from "notiflix/build/notiflix-confirm-aio";
-import {AddressService} from "../../../shareds/services/api/address.service";
 import {Observable} from "rxjs";
 import {Address} from "../../../shareds/models/address";
+import {Select, Store} from "@ngxs/store";
+import {AddressState} from "../store/states/address.state";
+import {AddressAction} from "../store/actions/address.action";
 
 @Component({
     selector: 'app-address-list',
@@ -11,31 +13,33 @@ import {Address} from "../../../shareds/models/address";
     styleUrls: ['./address-list.component.scss'],
 })
 export class AddressListComponent implements OnInit {
-    addresses$: Observable<Address[]>
+    @Select(AddressState.getAddresses) addresses$: Observable<Address[]>
 
     constructor(
         private notiflixService: NotiflixService,
-        private addressService: AddressService
+        private store: Store,
     ) {
     }
 
     ngOnInit() {
-        this.addresses$ = this.addressService.getAddresses()
+        this.store.dispatch(new AddressAction.FetchAll())
     }
 
 
-    deleteAddress(id: string) {
+    deleteAddress(id: number) {
         Confirm.show(
             'Delete Address',
             'Are you sure you want to delete this address?',
             'Yes',
             'No',
             () => {
-                this.addressService.deleteAddress(id).subscribe(()=>{
-                    this.notiflixService.failure('Address deleted')
-                    this.addresses$ = this.addressService.getAddresses()
-                },error => {
-                    this.notiflixService.warning('Address not deleted')
+                this.store.dispatch(new AddressAction.Delete(id)).subscribe({
+                    next:(data) => {
+                        this.notiflixService.failure('Address deleted')
+                    },
+                    error: () => {
+                        this.notiflixService.warning('Address not deleted')
+                    }
                 })
             },
             () => {this.notiflixService.warning('Operation canceled');},{

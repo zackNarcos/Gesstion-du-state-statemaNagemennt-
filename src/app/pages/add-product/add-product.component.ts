@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from "../../shareds/models/Product";
+import {Product} from "../../shareds/models/product";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProductsService} from "../../shareds/services/api/products.service";
 import {Router} from "@angular/router";
 import {NotiflixService} from "../../shareds/services/notiflix.service";
+import {Store} from "@ngxs/store";
+import {ProductAction} from "../../store/actions/product.action";
+import {ProductFormAction} from "../../store/actions/product-form.action";
 
 @Component({
   selector: 'app-add-product',
@@ -13,7 +15,7 @@ import {NotiflixService} from "../../shareds/services/notiflix.service";
 export class AddProductComponent implements OnInit{
   addProductForm: any ;
   constructor(
-      private prodService: ProductsService,
+      private store: Store,
       private router: Router,
       private notifService: NotiflixService
   )
@@ -30,6 +32,14 @@ export class AddProductComponent implements OnInit{
     )
   }
 
+  updateName() {
+      this.store.dispatch(new ProductFormAction.UpdateName(this.addProductForm.value.name))
+  }
+
+  updatePrice() {
+      this.store.dispatch(new ProductFormAction.UpdatePrice(this.addProductForm.value.price))
+  }
+
   save() {
     let product: Product =
       {
@@ -41,12 +51,14 @@ export class AddProductComponent implements OnInit{
           description : this.addProductForm.value.description
       }
 
-    this.prodService.addProduct(product).subscribe( resuslt => {
-        this.notifService.success(`Product: ${this.addProductForm.value.name} added with success`)
-        this.router.navigate(['/'])
-
-    },error => {
-        this.notifService.success(`Failled to add product: ${this.addProductForm.value.name}`)
+    this.store.dispatch(new ProductAction.Add(product)).subscribe( {
+        next: data => {
+            this.notifService.success(`Product: ${product.name} added with success`)
+            this.router.navigate(['/'])
+        },
+        error:() => {
+          this.notifService.failure(`Failled to add product: ${this.addProductForm.value.name}`)
+      }
     })
   }
 

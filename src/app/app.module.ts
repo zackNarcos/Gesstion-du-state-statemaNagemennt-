@@ -12,6 +12,13 @@ import { CartComponent } from './pages/cart/cart.component';
 import {HttpClientModule} from "@angular/common/http";
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {NgxsModule} from "@ngxs/store";
+import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
+import {ProductsState} from "./store/states/product.state";
+import {CartsState} from "./store/states/cart.state";
+import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
+import {NgxsWebsocketPluginModule} from "@ngxs/websocket-plugin";
+import {WebSocketModule} from "./shareds/web-socket/web-socket.module";
 
 @NgModule({
   declarations: [
@@ -29,7 +36,11 @@ import { FooterComponent } from './components/footer/footer.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    WebSocketModule,
+    NgxsModule.forRoot([ProductsState, CartsState]),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

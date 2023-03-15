@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Product} from "../../models/Product";
 import {Address} from "../../models/address";
 
 @Injectable({
@@ -22,15 +21,15 @@ export class AddressService {
         return this.http.get<Address>(`${this.URL_API}/addresses/${id}`);
     }
 
-    addAddress(address: Address) {
-        return this.http.post(`${this.URL_API}/addresses`, address)
+    addAddress(address: Address): Observable<Address>{
+        return this.http.post<Address>(`${this.URL_API}/addresses`, address)
     }
 
-    updateAddress(id: number | null, address: Address) {
-        return this.http.put(`${this.URL_API}/addresses/${id}`, address)
+    updateAddress(id: number | null, address: Address): Observable<Address> {
+        return this.http.put<Address>(`${this.URL_API}/addresses/${id}`, address)
     }
 
-    deleteAddress(id: string | null) {
+    deleteAddress(id: number | null) {
         return this.http.delete(`${this.URL_API}/addresses/${id}`)
     }
 }
