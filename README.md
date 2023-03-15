@@ -16,7 +16,7 @@ The basic concepts of NgRx are:
 
 `npm install`
 
-#### 1. Create resource models
+### 1. Create resource models
 
 Create models for the resources you will be managing in your application:
 
@@ -24,7 +24,7 @@ Create models for the resources you will be managing in your application:
 * Address resource
 * Cart resource
 
-#### 2. Create actions for each resource, including API calls
+### 2. Create actions for each resource, including API calls
 
 For each resource, create a set of actions that will be used to manage their state:
 
@@ -32,7 +32,7 @@ For each resource, create a set of actions that will be used to manage their sta
 * Address Actions
 * Cart Actions
 
-#### 3. Manage reducers for each resource
+### 3. Manage reducers for each resource
 
 Create reducers for each resource to handle state changes in response to actions:
 
