@@ -11,9 +11,11 @@ import {ProductRepository} from "../../../pages/address/state/product.repository
 export class ProductsService {
     private URL_API: string = environment.api
 
-  constructor(
-      private http:HttpClient,
-  ) { }
+    constructor(
+        private http: HttpClient,
+        private repo: ProductRepository
+    ) {
+    }
 
     getProducts(): Observable<Product[]> {
         return this.http.get<Product[]>(`${this.URL_API}/products`)
