@@ -1,9 +1,8 @@
 import {Product} from "../shareds/models/Product";
-import {Address} from "../shareds/models/address";
-import {productReducers} from "./reducers/product.reducer";
-import {cartReducers} from "./reducers/cart.reducer";
 import {Cart} from "../shareds/models/cart";
-
+import {AddressStateInterface} from "../pages/address/store/reducer/address.reducer";
+import * as fromRouter from '@ngrx/router-store';
+import {ProductFormStateInterface} from "./reducers/product-form.reducer";
 
 export interface ProductStateInterface {
     products: Product[];
@@ -16,13 +15,6 @@ export interface CartStateInterface {
     cart: Cart
 }
 
-export interface AddressStateInterface {
-    addresses: Address[];
-    address: Address;
-    loading: boolean;
-    error: any;
-}
-
 
 /**
  * The AppStateInterface is the interface that defines the state of the application.
@@ -31,6 +23,10 @@ export interface AddressStateInterface {
  */
 export interface AppStateInterface {
     addresses: AddressStateInterface,
+    productForm: ProductFormStateInterface
     cart: CartStateInterface,
     products: ProductStateInterface,
+    router: fromRouter.RouterReducerState<any>;
 }
+
+

@@ -14,10 +14,7 @@ Les concepts de base de NgRx sont les suivants :
 
 ## Installation
 
-`npm install @ngrx/effects @ngrx/entity @ngrx/store @ngrx/store-devtools rxjs-compat —-save`
-
-
-## Gestion des etats
+`npm install`
 
 #### 1. Créer les models des ressources
 

@@ -1,24 +1,37 @@
-import {ActionReducerMap, createReducer, on} from "@ngrx/store";
+import {createReducer, on} from "@ngrx/store";
 import {AddressActionsList} from "../actions/address.actions";
-import {AddressStateInterface, AppStateInterface} from "../app.state.interface";
-import {errorReducer} from "./meta.reducer";
+import {createEntityAdapter, EntityAdapter, EntityState} from "@ngrx/entity";
+import {Address} from "../../../../shareds/models/address";
 
-export const initialState: AddressStateInterface = {
-    addresses: [],
-    loading: false,
-    error: null,
-    address: null
+
+export interface AddressStateInterface extends EntityState<Address> {
+    address: Address;
+    loading: boolean;
+    error: any;
 }
 
 
+export const addressAdapter: EntityAdapter<Address> = createEntityAdapter<Address>({
+    selectId: (address) => address.id,
+    sortComparer: false
 
- export  const addressReducers = createReducer(
+});
 
+export const initialState: AddressStateInterface = addressAdapter.getInitialState(
+    {
+        address: null,
+        loading: false,
+        error: null
+    }
+);
+
+
+export const addressReducers = createReducer(
     initialState,
 
     /**
      * [loadAddress, loadAddressSuccess, loadAddressFailure actions]
-     * @description : load addreses from server, if success, update state, if failure, update error
+     * @description : load addresses from server, if success, update state, if failure, update error
      * @param state
      * @param action
      *
@@ -30,11 +43,7 @@ export const initialState: AddressStateInterface = {
         }
     }),
     on(AddressActionsList.loadAddressesSuccess, (state, action) => {
-        return {
-            ...state,
-            loading: false,
-            addresses: action.addresses
-        }
+        return addressAdapter.setAll(action.addresses, {...state, loading: false});
     }),
     on(AddressActionsList.loadAddressesFailure, (state, action) => {
         return {
@@ -47,7 +56,7 @@ export const initialState: AddressStateInterface = {
 
     /**
      * [createAddress, createAddressSuccess, createAddressFailure actions]
-     * @description : create addreses from server, if success, update state, if failure, update error
+     * @description : create addresses from server, if success, update state, if failure, update error
      * @param state
      * @param action
      */
@@ -58,11 +67,7 @@ export const initialState: AddressStateInterface = {
         }
     }),
     on(AddressActionsList.createAddressSuccess, (state, action) => {
-        return {
-            ...state,
-            loading: false,
-            addresses: [...state.addresses, action.address]
-        }
+        return addressAdapter.addOne(action.address, {...state, loading: false});
     }),
     on(AddressActionsList.createAddressFailure, (state, action) => {
         return {
@@ -87,16 +92,7 @@ export const initialState: AddressStateInterface = {
     }),
 
     on(AddressActionsList.updateAddressSuccess, (state, action) => {
-        return {
-            ...state,
-            loading: false,
-            addresses: state.addresses.map(address => {
-                if (address.id === action.address.id) {
-                    return action.address;
-                }
-                return address;
-            })
-        }
+        return addressAdapter.updateOne({id: action.address.id, changes: action.address}, {...state, loading: false});
     }),
 
     on(AddressActionsList.updateAddressFailure, (state, action) => {
@@ -121,11 +117,7 @@ export const initialState: AddressStateInterface = {
         }
     }),
     on(AddressActionsList.deleteAddressSuccess, (state, action) => {
-        return {
-            ...state,
-            loading: false,
-            addresses: state.addresses.filter(address => address.id !== action.addressId)
-        }
+        return addressAdapter.removeOne(action.addressId, {...state, loading: false});
     }),
     on(AddressActionsList.deleteAddressFailure, (state, action) => {
         return {

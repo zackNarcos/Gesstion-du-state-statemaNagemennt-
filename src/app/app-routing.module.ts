@@ -5,7 +5,7 @@ import {ProductComponent} from "./pages/product/product.component";
 import {CartComponent} from "./pages/cart/cart.component";
 import {AddProductComponent} from "./pages/add-product/add-product.component";
 
-const routes: Routes = [
+export  const routes: Routes = [
     // routes without lazy loading
     {
         path: '',

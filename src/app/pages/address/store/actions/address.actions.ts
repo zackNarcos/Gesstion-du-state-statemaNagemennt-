@@ -1,15 +1,15 @@
 import {createAction, props} from "@ngrx/store";
-import {Address} from "../../shareds/models/address";
+import {Address} from "../../../../shareds/models/address";
 
- enum AddressActions  {
+enum AddressActions {
     CREATE_ADDRESS = '[Address Form Page] Create Address when submit form',
-    CREATE_ADDRESS_SUCCESS = '[Address List Page] Create Address Success',
-    CREATE_ADDRESS_FAILURE = '[Address List Page] Create Address Failure',
+    CREATE_ADDRESS_SUCCESS = '[Address Form Page] Create Address Success',
+    CREATE_ADDRESS_FAILURE = '[Address Form Page] Create Address Failure',
 
 
     UPDATE_ADDRESS = '[Address Form Page] Update Address when submit form',
-    UPDATE_ADDRESS_SUCCESS = '[Address List Page] Update Address Success',
-    UPDATE_ADDRESS_FAILURE = '[Address List Page] Update Address Failure',
+    UPDATE_ADDRESS_SUCCESS = '[Address Form Page] Update Address Success',
+    UPDATE_ADDRESS_FAILURE = '[Address Form Page] Update Address Failure',
 
 
     DELETE_ADDRESS = '[Address List Page] Delete Address from api when click delete button',

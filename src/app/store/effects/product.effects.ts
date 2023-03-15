@@ -1,17 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {ProductsService} from "../../shareds/services/api/products.service";
-import {catchError, mergeMap, map} from "rxjs/operators";
+import {catchError, map, mergeMap} from "rxjs/operators";
 import {ProductActionsList} from "../actions/product.actions";
 import {of} from "rxjs";
 
 @Injectable()
-export class ProductEffects{
-    constructor(
-        private actions$: Actions,
-        private productService: ProductsService
-    ){}
-
+export class ProductEffects {
     loadProducts$ = createEffect(
         () => this.actions$.pipe(
             ofType(ProductActionsList.loadProducts),
@@ -22,7 +17,6 @@ export class ProductEffects{
                 ))
         )
     );
-
     loadProduct$ = createEffect(
         () => this.actions$.pipe(
             ofType(ProductActionsList.loadProduct),
@@ -33,7 +27,6 @@ export class ProductEffects{
                 ))
         )
     );
-
     createProduct$ = createEffect(
         () => this.actions$.pipe(
             ofType(ProductActionsList.addProduct),
@@ -44,5 +37,11 @@ export class ProductEffects{
                 ))
         )
     );
+
+    constructor(
+        private actions$: Actions,
+        private productService: ProductsService
+    ) {
+    }
 
 }

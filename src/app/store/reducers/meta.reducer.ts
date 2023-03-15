@@ -1,4 +1,4 @@
-import { ActionReducer, Action } from '@ngrx/store';
+import {Action, ActionReducer} from '@ngrx/store';
 
 export function errorReducer<TState>(
     reducer: ActionReducer<TState>
@@ -14,3 +14,5 @@ export function errorReducer<TState>(
         }
     };
 }
+
+

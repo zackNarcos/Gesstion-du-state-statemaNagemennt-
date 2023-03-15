@@ -1,13 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AddressService} from "../../../shareds/services/api/address.service";
-import {Address} from "../../../shareds/models/address";
-import {NotiflixService} from "../../../shareds/services/notiflix.service";
-import {AppStateInterface} from "../../../store/app.state.interface";
-import {select, Store} from "@ngrx/store";
-import {AddressActionsList} from "../../../store/actions/address.actions";
-import {addressSelectors} from "../../../store/selectors/address.selectors";
+import {Address} from "../../../../shareds/models/address";
+import {NotiflixService} from "../../../../shareds/services/notiflix.service";
+import {AddressFacade} from "../../store/facade/address.facade";
 
 @Component({
     selector: 'app-address-form',
@@ -16,16 +12,18 @@ import {addressSelectors} from "../../../store/selectors/address.selectors";
 })
 export class AddressFormComponent implements OnInit {
 
-    constructor(
-        private route : ActivatedRoute,
-        private router: Router,
-        private notiflixService: NotiflixService,
-        private store: Store<AppStateInterface>
-        ) {}
-
     addAddressForm: FormGroup
     addressId: number = null;
     selectedAddress: Address = null;
+
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private notiflixService: NotiflixService,
+        private addressFacade: AddressFacade,
+    ) {
+    }
+
     ngOnInit() {
         // Create the form group and form controls when the component is initialized
         this.addAddressForm = new FormGroup({
@@ -41,9 +39,9 @@ export class AddressFormComponent implements OnInit {
         // Get the address id from the route if it exists
         this.route.params.subscribe(params => {
             this.addressId = params['id'];
-            if (this.addressId){
-                this.store.dispatch(AddressActionsList.loadAddressById({addressId: this.addressId}))
-                this.store.pipe(select(addressSelectors.selectAddress)).subscribe({
+            if (this.addressId) {
+                this.addressFacade.getAddress(this.addressId)
+                this.addressFacade.address$.subscribe({
                     next: (address: Address) => {
                         this.selectedAddress = address
                         this.addAddressForm.patchValue(address)
@@ -61,17 +59,17 @@ export class AddressFormComponent implements OnInit {
 
     submitForm() {
         if (this.addressId != null) {
-            let address: Address =  this.addAddressForm.value
+            let address: Address = this.addAddressForm.value
             address.id = this.addressId
-            this.store.dispatch(AddressActionsList.updateAddress({address: address}))
+            this.addressFacade.updateAddress(address)
             this.notiflixService.success(`Address: ${this.addAddressForm.value.address} added`)
             this.addAddressForm.reset()
             this.router.navigateByUrl('/addresses')
 
-        }else{
+        } else {
             //when is new address
-            let address: Address =  this.addAddressForm.value
-            this.store.dispatch(AddressActionsList.createAddress({address: address}))
+            let address: Address = this.addAddressForm.value
+            this.addressFacade.createAddress(address)
             this.notiflixService.success(`Address: ${this.addAddressForm.value.address} added`)
             this.addAddressForm.reset()
             this.router.navigateByUrl('/addresses')

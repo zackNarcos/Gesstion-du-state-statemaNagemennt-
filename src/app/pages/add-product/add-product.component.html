@@ -1,25 +1,34 @@
-<form [formGroup]="addProductForm" (ngSubmit)="addProductForm.valid && save()" class="row mx-auto my-5 col-7 needs-validation d-flex g-3  p-5 border rounded-5 border-dark bg-secondary-subtle">
+<form (ngSubmit)="addProductForm.valid && save()" [formGroup]="addProductForm"
+      class="row mx-auto my-5 col-7 needs-validation d-flex g-3  p-5 border rounded-5 border-dark bg-secondary-subtle">
     <div class="col-md-6">
-        <label for="Name" class="form-label">Name</label>
-        <input type="email" [ngClass]="{'is-invalid': addProductForm.get('name').invalid && addProductForm.get('name').touched }" class="form-control" id="Name" [formControlName]="'name'">
+        <label class="form-label" for="Name">Name</label>
+        <input (input)="onFormUpdate()" [formControlName]="'name'"
+               [ngClass]="{'is-invalid': addProductForm.get('name').invalid && addProductForm.get('name').touched }"
+               class="form-control" id="Name" type="email">
     </div>
     <div class="col-md-6">
-        <label for="Price" class="form-label">Price</label>
+        <label class="form-label" for="Price">Price</label>
         <div class="input-group">
             <span class="input-group-text">$</span>
-            <input type="number" [ngClass]="{'is-invalid': addProductForm.get('price').invalid && addProductForm.get('price').touched }" class="form-control" id="Price" [formControlName]="'price'">
+            <input (input)="onFormUpdate()" [formControlName]="'price'"
+                   [ngClass]="{'is-invalid': addProductForm.get('price').invalid && addProductForm.get('price').touched }"
+                   class="form-control" id="Price" type="number">
         </div>
     </div>
     <div class="col-12">
-        <label for="Description" class="form-label">Description</label>
-        <textarea class="form-control" [ngClass]="{'is-invalid': addProductForm.get('description').invalid && addProductForm.get('description').touched }" rows="3" id="Description" [formControlName]="'description'"></textarea>
+        <label class="form-label" for="Description">Description</label>
+        <textarea (input)="onFormUpdate()" [formControlName]="'description'"
+                  [ngClass]="{'is-invalid': addProductForm.get('description').invalid && addProductForm.get('description').touched }"
+                  class="form-control" id="Description" rows="3"></textarea>
     </div>
     <div class="col-12">
-        <label for="Image" class="form-label">Image</label>
-        <input type="url" [ngClass]="{'is-invalid': addProductForm.get('image').invalid }" class="form-control" id="Image" [formControlName]="'image'">
+        <label class="form-label" for="Image">Image</label>
+        <input [formControlName]="'image'" [ngClass]="{'is-invalid': addProductForm.get('image').invalid }"
+               class="form-control"
+               id="Image" type="url">
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-dark form-control mt-2 p-2">Save product</button>
+        <button class="btn btn-dark form-control mt-2 p-2" type="submit">Save product</button>
     </div>
 
 </form>

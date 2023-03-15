@@ -1,29 +1,22 @@
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {AddressService} from "../../shareds/services/api/address.service";
+import {AddressService} from "../../../../shareds/services/api/address.service";
 import {AddressActionsList} from "../actions/address.actions";
-import {catchError, map, mergeMap} from "rxjs/operators";
+import {catchError, map, mergeMap, switchMap} from "rxjs/operators";
 import {of} from "rxjs";
 import {Injectable} from "@angular/core";
 
 @Injectable()
 export class AddressEffects {
-    constructor(
-        private actions$: Actions,
-        private addressService: AddressService
-    ) {
-    }
-
     loadAddresses$ = createEffect(
         () => this.actions$.pipe(
             ofType(AddressActionsList.loadAddresses),
-            mergeMap(() => this.addressService.getAddresses()
+            switchMap(() => this.addressService.getAddresses()
                 .pipe(
                     map(addresses => AddressActionsList.loadAddressesSuccess({addresses})),
                     catchError(error => of(AddressActionsList.loadAddressesFailure({error})))
                 ))
         )
     );
-
     createAddress$ = createEffect(
         () => this.actions$.pipe(
             ofType(AddressActionsList.createAddress),
@@ -34,8 +27,6 @@ export class AddressEffects {
                 ))
         )
     );
-
-
     deleteAddress$ = createEffect(
         () => this.actions$.pipe(
             ofType(AddressActionsList.deleteAddress),
@@ -43,11 +34,9 @@ export class AddressEffects {
                 .pipe(
                     map(() => AddressActionsList.deleteAddressSuccess({addressId: action.addressId})),
                     catchError(error => of(AddressActionsList.deleteAddressFailure({error})))
-
                 ))
         )
     );
-
     updateAddress$ = createEffect(
         () => this.actions$.pipe(
             ofType(AddressActionsList.updateAddress),
@@ -58,7 +47,6 @@ export class AddressEffects {
                 ))
         )
     );
-
     loadAddressById$ = createEffect(
         () => this.actions$.pipe(
             ofType(AddressActionsList.loadAddressById),
@@ -69,6 +57,12 @@ export class AddressEffects {
                 ))
         )
     );
+
+    constructor(
+        private actions$: Actions,
+        private addressService: AddressService
+    ) {
+    }
 
 
 }
