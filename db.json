@@ -69,6 +69,14 @@
       "price": 100,
       "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?"
+    },
+    {
+      "id": 11,
+      "qte": 0,
+      "name": "jesuisunformulaire",
+      "price": 887388388,
+      "image": "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
+      "description": "shwidis jsbjw"
     }
   ],
   "profile": {
@@ -79,21 +87,21 @@
       "firstName": "abessolo",
       "lastName": "zackarie",
       "email": "zackabess@gmail.com",
-      "address": "Ouest foire V3",
-      "country": "hello",
-      "state": "california",
-      "zip": "1233",
-      "id": 1
-    },
-    {
-      "firstName": "abessolo",
-      "lastName": "zackarie",
-      "email": "zackabess@gmail.com",
       "address": "Ouest foire",
       "country": "hello",
       "state": "california",
       "zip": "1233",
       "id": 2
+    },
+    {
+      "firstName": "medina",
+      "lastName": "hello",
+      "email": "essedansomon@outlook.fr",
+      "address": "france paloi",
+      "country": "hello",
+      "state": "california",
+      "zip": "2u3ii3",
+      "id": 3
     }
   ]
 }
