@@ -21,13 +21,15 @@ export class CartService {
             next: () => {
                 this.notiflixService.success( `${product.name} added to cart` )
             }
-        }); // Dispatch action by NGXS store
-        this.socket$.next({ type: '[Cart] Add Product', payload: { product: product, qte: qte } }); // send the same action by WebSocket
+        });
+
+        //TODO:: Debug this call
+        this.socket$.next({ type: '[Socket] Add Product', payload: { product: product, qte: qte } }); // send the same action by WebSocket
     }
 
     checkout() {
         this.store.dispatch(new CartAction.Checkout());
-        this.socket$.next({type: '[Cart] Checkout'});
+        this.socket$.next({type: '[Socket] Checkout'});
     }
 
 

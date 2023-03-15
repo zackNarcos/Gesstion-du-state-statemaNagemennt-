@@ -6,6 +6,8 @@ import {NotiflixService} from "../../shareds/services/notiflix.service";
 import {Store} from "@ngxs/store";
 import {ProductAction} from "../../store/actions/product.action";
 import {ProductFormAction} from "../../store/actions/product-form.action";
+import {ProductForm} from "../../shareds/models/product.form";
+import {ProductFormState} from "../../store/states/product-form.state";
 
 @Component({
   selector: 'app-add-product',
@@ -13,7 +15,14 @@ import {ProductFormAction} from "../../store/actions/product-form.action";
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit{
-  addProductForm: any ;
+    addProductForm  = new FormGroup<any>(
+        {
+            name: new FormControl("", [Validators.required]),
+            price: new FormControl(0, [Validators.required, Validators.min(0)]),
+            image: new FormControl("https://dummyimage.com/450x300/dee2e6/6c757d.jpg", [Validators.required]),
+            description: new FormControl("", [Validators.required]),
+        }
+    )
   constructor(
       private store: Store,
       private router: Router,
@@ -22,23 +31,18 @@ export class AddProductComponent implements OnInit{
   {}
 
   ngOnInit(): void {
-    this.addProductForm  = new FormGroup<any>(
-        {
-          name: new FormControl("", [Validators.required]),
-          price: new FormControl(0, [Validators.required, Validators.min(0)]),
-          image: new FormControl("https://dummyimage.com/450x300/dee2e6/6c757d.jpg", [Validators.required]),
-          description: new FormControl("", [Validators.required]),
+    this.store.select(ProductFormState.getProductForm).subscribe({
+        next:(data)=>{
+            this.addProductForm.patchValue(data)
         }
-    )
+    })
   }
 
-  updateName() {
-      this.store.dispatch(new ProductFormAction.UpdateName(this.addProductForm.value.name))
+  updateForm() {
+      let productForm: ProductForm = this.addProductForm.value
+      this.store.dispatch(new ProductFormAction.UpdateProductForm(productForm))
   }
 
-  updatePrice() {
-      this.store.dispatch(new ProductFormAction.UpdatePrice(this.addProductForm.value.price))
-  }
 
   save() {
     let product: Product =
@@ -61,5 +65,4 @@ export class AddProductComponent implements OnInit{
       }
     })
   }
-
 }

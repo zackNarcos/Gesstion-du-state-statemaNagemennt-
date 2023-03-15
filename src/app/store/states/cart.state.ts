@@ -1,7 +1,9 @@
-import {State, Action, StateContext, Selector} from '@ngxs/store';
+import {State, Action, StateContext, Selector, Store} from '@ngxs/store';
 import {Injectable} from "@angular/core";
 import {CartAction} from "../actions/cart.action";
 import {Product} from "../../shareds/models/product";
+import UpdateWebSocketData = CartAction.UpdateWebSocketData;
+import {state} from "@angular/animations";
 
 export interface CartStateModel {
     products: Product[]
@@ -20,7 +22,9 @@ export interface CartStateModel {
 
 @Injectable()
 export class CartsState {
-    constructor() {
+    constructor(
+        private store: Store
+    ) {
     }
 
     @Selector()
@@ -70,5 +74,11 @@ export class CartsState {
             total: 0,
             totalItems: 0
         });
+    }
+
+    //TODO::Debug this from websocket calling
+    @Action(CartAction.UpdateWebSocketData)
+    updateWebSocketData(ctx: StateContext<CartStateModel>, { payload }: UpdateWebSocketData) {
+        this.store.dispatch(new CartAction.AddProduct({product: payload.product, qte: payload.qte}))
     }
 }

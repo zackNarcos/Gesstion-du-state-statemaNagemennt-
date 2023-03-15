@@ -14,4 +14,10 @@ export namespace CartAction {
     export class Checkout {
         static readonly type = '[Cart] Checkout';
     }
+
+    export class UpdateWebSocketData {
+        static readonly type = '[WebSocket] Update Data';
+
+        constructor(public payload: any) {}
+    }
 }

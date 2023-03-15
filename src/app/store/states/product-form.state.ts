@@ -1,38 +1,20 @@
 import {State, Action, StateContext, Selector} from '@ngxs/store';
 import {Injectable} from "@angular/core";
-import {tap} from "rxjs";
-import {Product} from "../../shareds/models/product";
-import {ProductsService} from "../../shareds/services/api/products.service";
-import {ProductAction} from "../actions/product.action";
 import {ProductFormAction} from "../actions/product-form.action";
-
-export interface ProductStateModel {
-    products: Product[];
-    selectedProduct: Product
-}
-
-@State<ProductStateModel>({
-    name: 'products',
-    defaults: {
-        products: [],
-        selectedProduct : null
-    }
-})
+import {ProductForm} from "../../shareds/models/product.form";
 
 export class ProductFormStateModel {
-    productForm: Product;
+    productForm: ProductForm;
 }
 
 @State<ProductFormStateModel>({
     name: 'productForm',
     defaults: {
         productForm: {
-            id: 0,
             name: '',
             price: 0,
             description: '',
-            qte: 0,
-            image: ''
+            image: 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg'
         }
     }
 })
@@ -43,47 +25,12 @@ export class ProductFormState {
         return state.productForm;
     }
 
-    @Action(ProductFormAction.UpdateName)
-    updateName(ctx: StateContext<ProductFormStateModel>, { payload }: ProductFormAction.UpdateName) {
-        const state = ctx.getState();
-        ctx.patchState({
-            productForm: {
-                ...state.productForm,
-                name: payload
-            }
-        });
-    }
-
-    @Action(ProductFormAction.UpdatePrice)
-    updatePrice(ctx: StateContext<ProductFormStateModel>, { payload }: ProductFormAction.UpdatePrice) {
-        const state = ctx.getState();
-        ctx.patchState({
-            productForm: {
-                ...state.productForm,
-                price: payload
-            }
-        });
-    }
-
-    @Action(ProductFormAction.UpdateDescription)
-    updateDescription(ctx: StateContext<ProductFormStateModel>, { payload }: ProductFormAction.UpdateDescription) {
-        const state = ctx.getState();
-        ctx.patchState({
-            productForm: {
-                ...state.productForm,
-                description: payload
-            }
-        });
-    }
-
-    @Action(ProductFormAction.UpdateImage)
-    updateImage(ctx: StateContext<ProductFormStateModel>, { payload }: ProductFormAction.UpdateImage) {
-        const state = ctx.getState();
-        ctx.patchState({
-            productForm: {
-                ...state.productForm,
-                description: payload
-            }
+    @Action(ProductFormAction.UpdateProductForm)
+    updateForm(ctx: StateContext<ProductFormStateModel>, action: ProductFormAction.UpdateProductForm) {
+        const state = ctx.getState()
+        ctx.setState({
+            ...state,
+            productForm: action.payload
         });
     }
 }
