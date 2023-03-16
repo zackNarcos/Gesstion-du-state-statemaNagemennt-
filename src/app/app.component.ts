@@ -11,21 +11,4 @@ import UpdateWebSocketData = CartAction.UpdateWebSocketData;
 })
 export class AppComponent{
   title = 'test-competence';
-  webSocketData = '';
-
-  constructor(private store: Store) {
-    // Créer une connexion WebSocket
-    const ws = webSocket('ws://localhost:4200');
-
-    // TODO:: Debug this methode
-    // Écouter les événements de la connexion WebSocket
-    ws.subscribe(
-        // Mise à jour de l'état de l'application NGXS
-        (data: any) => this.store.dispatch(new UpdateWebSocketData(data)),
-        // Gérer les erreurs de la connexion WebSocket
-        (error: any) => console.error(error),
-        // Fermer la connexion WebSocket
-        () => console.log('WebSocket connection closed')
-    );
-  }
 }

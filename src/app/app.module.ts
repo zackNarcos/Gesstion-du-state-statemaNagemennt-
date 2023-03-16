@@ -17,8 +17,6 @@ import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {ProductsState} from "./store/states/product.state";
 import {CartsState} from "./store/states/cart.state";
 import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
-import {NgxsWebsocketPluginModule} from "@ngxs/websocket-plugin";
-import {WebSocketModule} from "./shareds/web-socket/web-socket.module";
 import {ProductFormState} from "./store/states/product-form.state";
 
 @NgModule({
@@ -38,7 +36,6 @@ import {ProductFormState} from "./store/states/product-form.state";
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    WebSocketModule,
     NgxsModule.forRoot([ProductsState, CartsState, ProductFormState]),
     NgxsRouterPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
