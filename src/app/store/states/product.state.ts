@@ -1,9 +1,10 @@
 import {State, Action, StateContext, Selector} from '@ngxs/store';
 import {Injectable} from "@angular/core";
-import {tap} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {Product} from "../../shareds/models/product";
 import {ProductsService} from "../../shareds/services/api/products.service";
 import {ProductAction} from "../actions/product.action";
+import {RxState} from "@rx-angular/state";
 
 export interface ProductStateModel {
     products: Product[];
@@ -19,9 +20,12 @@ export interface ProductStateModel {
 })
 
 @Injectable()
-export class ProductsState {
+export class ProductsState extends RxState<ProductStateModel>{
     constructor(private productsService: ProductsService) {
+        super();
     }
+    readonly products$: Observable<any> = this.select(
+    )
 
     @Selector()
     static getProducts(state: ProductStateModel): Product[] {
