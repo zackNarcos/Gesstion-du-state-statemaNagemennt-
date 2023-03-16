@@ -11,24 +11,18 @@ import {RxState} from "@rx-angular/state";
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [RxState],
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent extends RxState<ProductsState> implements OnInit{
   // @Select (ProductsState.getProducts) products$: Observable<Product[]>
-  readonly products$: Observable<Product[]>;
+  model$ = this.select();
+  products$: Observable<any> = this.select("products$");
   constructor(
-      private store: Store,
-      private readonly productState: ProductsState)
+      private store: Store)
   {
-    this.productState.products$.subscribe({
-      next: (data)=>{
-        console.log("success")
-      },
-      error: (data)=>{
-        console.log("error")
-      }
-    })
-    this.products$ = this.productState.products$;
+    super()
+    // this.products$ = this.store.select(ProductsState.getProducts);
+    this.products$ = this.store.select(state => state.products.products);
+    //console.log(this.products$)
   }
 
   ngOnInit(): void {

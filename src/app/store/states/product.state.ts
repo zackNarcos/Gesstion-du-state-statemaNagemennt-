@@ -24,8 +24,7 @@ export class ProductsState extends RxState<ProductStateModel>{
     constructor(private productsService: ProductsService) {
         super();
     }
-    readonly products$: Observable<any> = this.select(
-    )
+    products$ = this.select("products");
 
     @Selector()
     static getProducts(state: ProductStateModel): Product[] {
