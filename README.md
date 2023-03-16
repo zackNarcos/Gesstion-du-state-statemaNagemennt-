@@ -1,5 +1,7 @@
 # NgRx
 
+
+
 NgRx is an open-source library for state management in Angular applications. It is based on the Redux design pattern and allows for storing and managing the application state in a predictable and centralized manner.
 
 ## Basic Concepts
