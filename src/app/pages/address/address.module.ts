@@ -12,6 +12,8 @@ import {AddressService} from "../../shareds/services/api/address.service";
 import {AddressEffects} from "./store/effects/address.effects";
 import {errorReducer} from "../../store/reducers/meta.reducer";
 import {AddressFacade} from "./store/facade/address.facade";
+import {ForModule} from "@rx-angular/template/for";
+import {IfModule} from "@rx-angular/template/if";
 
 const metaReducers: MetaReducer<any>[] = [errorReducer];
 
@@ -26,6 +28,8 @@ const metaReducers: MetaReducer<any>[] = [errorReducer];
         ReactiveFormsModule,
         StoreModule.forFeature('addresses', addressReducers, {metaReducers}),
         EffectsModule.forFeature([AddressEffects]),
+        ForModule,
+        IfModule,
     ],
     providers: [AddressService, AddressFacade]
 })

@@ -24,6 +24,7 @@ import {routerReducer, StoreRouterConnectingModule} from "@ngrx/router-store";
 import {CustomSerializer} from "./store/store-route/custom.serializer";
 import {RouterModule} from "@angular/router";
 import {productFormReducer} from "./store/reducers/product-form.reducer";
+import {ForModule} from "@rx-angular/template/for";
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import {productFormReducer} from "./store/reducers/product-form.reducer";
             serializer: CustomSerializer,
         }),
         EntityDataModule.forRoot(entityConfig),
+        ForModule,
 
     ],
     providers: [],

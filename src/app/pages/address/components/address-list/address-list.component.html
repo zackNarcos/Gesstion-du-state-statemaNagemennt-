@@ -5,7 +5,7 @@
         </div>
     </div>
 </section>
-<div class="container-xl" *ngIf="addresses$ | async as addresses" >
+<div *ngIf="addresses$ | async as addresses" class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -14,7 +14,8 @@
                         <h2>Addresses <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7 ">
-                        <a [routerLink]="'/addresses/new'" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New </span></a>
+                        <a [routerLink]="'/addresses/new'" class="btn btn-secondary"><i
+                                class="material-icons">&#xE147;</i> <span>Add New </span></a>
                     </div>
                 </div>
             </div>
@@ -30,15 +31,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let address of addresses">
+                <tr *rxFor="let address of addresses">
                     <td>{{ address.id }}</td>
                     <td>{{ address.address }}</td>
                     <td>{{ address.country }}</td>
                     <td>{{ address.state }}</td>
                     <td>{{ address.zip }}</td>
                     <td class="cursor-pointer">
-                        <a [routerLink]="['/addresses', address.id, 'edit']" class="settings cursor-pointer" title="Edit" data-toggle="tooltip"><i class="material-icons">edit</i></a>
-                        <a (click)="deleteAddress(address.id)" class="delete cursor-pointer" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                        <a [routerLink]="['/addresses', address.id, 'edit']" class="settings cursor-pointer"
+                           data-toggle="tooltip" title="Edit"><i class="material-icons">edit</i></a>
+                        <a (click)="deleteAddress(address.id)" class="delete cursor-pointer" data-toggle="tooltip"
+                           title="Delete"><i class="material-icons">&#xE5C9;</i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -47,15 +50,15 @@
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active text-white"><a href="#" class="page-link text-white">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item active text-white"><a class="page-link text-white" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<div class="container-xl" *ngIf="isLoading$ | async">loading...</div>
+<div *ngIf="isLoading$ | async" class="container-xl">loading...</div>
