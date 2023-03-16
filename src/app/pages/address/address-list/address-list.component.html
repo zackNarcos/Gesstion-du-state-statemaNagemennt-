@@ -29,8 +29,8 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr *ngFor="let address of addresses$ | async">
+                <tbody *rxFor="addresses$ let addresses">
+                <tr *ngFor="let address of addresses">
                     <td>{{ address.id }}</td>
                     <td>{{ address.address }}</td>
                     <td>{{ address.country }}</td>

@@ -1,4 +1,4 @@
-<div *ngIf="products$ | async as products" class="container px-5">
+<div *rxLet="products$ let products" class="container px-5">
   <main>
     <div class="py-5 text-center">
       <i class="bi bi-cart-check fs-1"></i>
@@ -10,18 +10,18 @@
       <div class="order-md-first">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">{{ totalItems$ |async }}</span>
+          <span *rxLet="totalItems$; let totalItems" class="badge bg-primary rounded-pill">{{ totalItems }}</span>
         </h4>
         <table class="table mb-3">
           <tbody>
-          <tr *ngFor="let product of products">
+          <tr *rxFor="let product of products">
             <td><h6 class="my-0">{{ product.name }}</h6></td>
             <td><small class="btn btn-dark text-light"><i class="bi bi-collection me-2"></i>{{ product.qte }}</small></td>
             <td class="text-end"><span class="text-muted">${{ product.price }}</span></td>
           </tr>
           <tr class="bg-warning-subtle">
             <td colspan="2"><span>Total (USD)</span></td>
-            <td class="text-end">${{totalPrice$ | async}}</td>
+            <td *rxLet="totalPrice$; let totalPrice" class="text-end">${{totalPrice}}</td>
           </tr>
           </tbody>
         </table>

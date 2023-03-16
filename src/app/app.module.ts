@@ -20,6 +20,8 @@ import {NgxsRouterPluginModule} from "@ngxs/router-plugin";
 import {NgxsWebsocketPluginModule} from "@ngxs/websocket-plugin";
 import {WebSocketModule} from "./shareds/web-socket/web-socket.module";
 import {ProductFormState} from "./store/states/product-form.state";
+import {LetModule} from "@rx-angular/template/let";
+import {ForModule} from "@rx-angular/template/for";
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import {ProductFormState} from "./store/states/product-form.state";
     NgxsModule.forRoot([ProductsState, CartsState, ProductFormState]),
     NgxsRouterPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    LetModule,
+    ForModule
   ],
   providers: [],
   bootstrap: [AppComponent]
